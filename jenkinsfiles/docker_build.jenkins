@@ -36,6 +36,7 @@ pipeline {
                 echo " ===== start pushing image ====="
                 sh '''
                 docker push jeka4el/toolbox:latest
+                '''
   
             }
         }
