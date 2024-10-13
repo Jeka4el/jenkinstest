@@ -13,7 +13,7 @@ pipeline {
     stages {
         stage("docker login") {
             steps {
-                echo " ===== start building image ====="
+                echo " ===== docker login ====="
                 withCredentials([usernamePassword(credentialsId: 'dockerhubjeka4el', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
                     sh """
                     docker login -u $USERNAME -p $PASSWORD
@@ -21,15 +21,22 @@ pipeline {
                 }
             }
         }
-        
-        
-        
+                
         stage("Create docker image") {
             steps {
                 echo " ===== start building image ====="
                 dir('docker/toolbox') {
                     sh 'docker build -t jeka4el/toolbox:latest .'
                 }
+            }
+        }
+
+        stage("docker push") {
+            steps {
+                echo " ===== start pushing image ====="
+                sh '''
+                docker push jeka4el/toolbox:latest
+  
             }
         }
     }
