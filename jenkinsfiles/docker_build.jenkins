@@ -11,7 +11,20 @@ pipeline {
         timestamps()
     }
     stages {
-        stage("First step") {
+        stage("docker login") {
+            steps {
+                echo " ===== start building image ====="
+                withCredentials([usernamePassword(credentialsId: 'dockerhubjeka4el', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
+                    sh """
+                    docker login -u $USERNAME -p $PASSWORD
+                    """
+                }
+            }
+        }
+        
+        
+        
+        stage("Create docker image") {
             steps {
                 echo " ===== start building image ====="
                 dir('docker/toolbox') {
@@ -21,3 +34,4 @@ pipeline {
         }
     }
 }
+
