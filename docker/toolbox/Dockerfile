@@ -1,5 +1,5 @@
 FROM alpine
-RUN apk add --no-cache curl wget busybox-extras netcat-openbsd python3 py3-pip
+RUN apk add --no-cache curl wget busybox-extras netcat-openbsd python3 py3-pip postgresql-client
 RUN python3 -m venv /opt/venv
 RUN /opt/venv/bin/pip install awscli
 RUN apk add --no-cache vim
